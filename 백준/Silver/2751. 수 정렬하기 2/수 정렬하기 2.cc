@@ -1,5 +1,8 @@
 #include <iostream>
+#include <vector>
 #include <set>
+#include <algorithm>
+#include <queue>
 using namespace std;
 
 #define endl '\n'
@@ -9,18 +12,19 @@ int main()
 	int n;
 	cin >> n;
 
-	multiset<int> s;
+	priority_queue<int, vector<int>, greater<int>> pq;
 
 	for (int i = 0; i < n; i++)
 	{
 		int temp;
 		cin >> temp;
-		s.insert(temp);
+		pq.push(temp);
 	}
 
-	for (auto i = s.begin(); i != s.end(); i++)
+	for (int i = 0; i < n; i++)
 	{
-		cout << *i << endl;
+		cout << pq.top() << endl;
+		pq.pop();
 	}
 
 	return 0;
