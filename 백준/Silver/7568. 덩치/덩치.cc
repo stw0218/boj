@@ -1,53 +1,54 @@
-#include <vector>
 #include <iostream>
+#include <vector>
 using namespace std;
 
-struct POS {
-	POS(int x, int y) {
-		a = x, b = y;
-	}
-	POS() {}
-	int a, b;
-	int rank = 1;
+struct info
+{
+	int x;
+	int y;
+	int rank;
 
-	bool operator>(POS pos) {
-		if (a > pos.a && b > pos.b)
-			return true;
-		else
-			return false;
-	}
-	bool operator<(POS pos) {
-		if (a < pos.a && b < pos.b)
-			return true;
-		else
-			return false;
+	info(int x, int y, int rank) : x(x), y(y), rank(rank) {}
+	info() = default;
+
+	bool operator<(const info& a) const
+	{
+		return x < a.x && y < a.y;
 	}
 };
 
-int main(void)
+int main()
 {
 	int n;
 	cin >> n;
 
-	vector<POS> pos;
+	vector<info> v(n);
 
-	for (int i = 0; i < n; i++) {
-		int a, b;
-		cin >> a >> b;
-		pos.push_back(POS(a, b));
+	for (int i = 0; i < n; i++)
+	{
+		int x, y;
+		cin >> x >> y;
+
+		v[i] = info(x, y, 1);
 	}
 
-	for (int i = 0; i < n; i++) {
-		for (int k = 0; k < n; k++) {
-			if (k == i)continue;
-			if (pos[i] < pos[k]) {
-				pos[i].rank++;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (j == i)
+				continue;
+
+			if (v[i] < v[j])
+			{
+				v[i].rank++;
 			}
 		}
 	}
 
-	for (int i = 0; i < n; i++) {
-		cout << pos[i].rank << " ";
+	for (auto i : v)
+	{
+		cout << i.rank << " ";
 	}
 
 	return 0;
