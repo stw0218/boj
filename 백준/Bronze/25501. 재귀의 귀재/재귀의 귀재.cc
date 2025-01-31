@@ -1,20 +1,25 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
 
 #define endl '\n'
 
 int recCount = 0;
 
-int recursion(const char* s, int l, int r) {
-	recCount++;
-	if (l >= r) return 1;
-	else if (s[l] != s[r]) return 0;
-	else return recursion(s, l + 1, r - 1);
-}
+int isPalindrome(string s) {
+	int l = 0;
+	int r = s.size() - 1;
 
-int isPalindrome(const char* s) {
-	return recursion(s, 0, strlen(s) - 1);
+	recCount++;
+	while (l < r) {
+		if (s[l] != s[r]) {
+			return 0;
+		}
+		l++;
+		r--;
+		recCount++;
+	}
+	return 1;
 }
 
 
@@ -31,7 +36,7 @@ int main()
 		string s;
 		cin >> s;
 
-		cout << isPalindrome(s.c_str()) << " " << recCount << endl;
+		cout << isPalindrome(s) << " " << recCount << endl;
 		recCount = 0;
 	}
 
