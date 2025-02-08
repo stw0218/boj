@@ -13,70 +13,25 @@ int main()
 	int n, m;
 	cin >> n >> m;
 
-	for (int i = 1; i <= n; i++)
-	{
-		vector<int> v(m);
-		v[0] = i;
-		if (m == 1)
-		{
-			cout << v[0] << endl;
-			continue;
-		}
-		for (int j = 1; j <= n; j++)
-		{
-			v[1] = j;
-			if (m == 2)
-			{
-				cout << v[0] << " " << v[1] << endl;
-				continue;
-			}
-			for (int k = 1; k <= n; k++)
-			{
-				v[2] = k;
-				if (m == 3)
-				{
-					cout << v[0] << " " << v[1] << " " << v[2] << endl;
-					continue;
-				}
-				for (int l = 1; l <= n; l++)
-				{
-					v[3] = l;
-					if (m == 4)
-					{
-						cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << endl;
-						continue;
-					}
-					for (int o = 1; o <= n; o++)
-					{
-						v[4] = o;
-						if (m == 5)
-						{
-							cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << endl;
-							continue;
-						}
-						for (int p = 1; p <= n; p++)
-						{
-							v[5] = p;
-							if (m == 6)
-							{
-								cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << " " << v[5] << endl;
-								continue;
-							}
-							for (int q = 1; q <= n; q++)
-							{
-								v[6] = q;
-								if (m == 7)
-								{
-									cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << " " << v[5] << " " << v[6] << endl;
-									continue;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    vector<int> v(m, 1);
+    while (true) {
+        for (int i = 0; i < m; ++i) {
+            cout << v[i] << " ";
+        }
+        cout << endl;
+
+        int idx = m - 1;
+        while (idx >= 0 && v[idx] == n) {
+            --idx;
+        }
+
+        if (idx < 0) break;
+
+        ++v[idx];
+        for (int i = idx + 1; i < m; ++i) {
+            v[i] = 1;
+        }
+    }
 
 	return 0;
 }
