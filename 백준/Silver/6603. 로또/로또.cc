@@ -16,26 +16,21 @@ int main()
 		for (int i = 0; i < N; i++)
 			cin >> v[i];
 
-		// ex) 1 2 3 4 5 6 7 -> len = 7, num1 = 1~2, num2 = 3~4, num3 = 5~6 ...
-		// num1 v[0]~v[n-6]
-		// num2 v[1]~v[n-5]
-		// num3 v[2]~v[n-4]
-		// num4 v[3]~v[n-3]
-		// num5 v[4]~v[n-2]
-		// num6 v[5]~v[n-1]
-		for (int i = 0; i < N - 5; i++) {
-			for (int j = i + 1; j < N - 4; j++) {
-				for (int k = j + 1; k < N - 3; k++) {
-					for (int l = k + 1; l < N - 2; l++) {
-						for (int m = l + 1; m < N - 1; m++) {
-							for (int n = m + 1; n < N; n++) {
-								cout << v[i] << ' ' << v[j] << ' ' << v[k] << ' ' << v[l] << ' ' << v[m] << ' ' << v[n] << '\n';
-							}
-						}
-					}
-				}
-			}
-		}
+        // 선택할 요소를 표시하는 비트 마스크 생성
+        // 처음 6개는 1(선택), 나머지는 0(미선택)
+        vector<bool> bitmask(N, false);
+        fill(bitmask.begin(), bitmask.begin() + 6, true);
+
+        // 모든 가능한 조합 생성
+        do {
+            for (int i = 0; i < N; ++i) {
+                if (bitmask[i]) {
+                    cout << v[i] << ' ';
+                }
+            }
+            cout << '\n';
+        } while (prev_permutation(bitmask.begin(), bitmask.end()));
+
 		cout << '\n';
 	}
 
